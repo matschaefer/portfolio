@@ -1,8 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { lazy, Suspense, useRef } from 'react'
+import { useRef } from 'react'
 import ScrambleText from '@/components/ScrambleText'
-
-const WaveField = lazy(() => import('@/components/WaveField'))
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null)
@@ -20,20 +18,6 @@ export default function Hero() {
       id="top"
       className="relative flex min-h-[100vh] flex-col justify-center overflow-hidden px-6 pt-24 md:px-12 lg:px-16"
     >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute right-6 top-28 hidden h-[300px] w-[400px] overflow-hidden bg-ink md:right-12 md:block lg:right-16 lg:h-[380px] lg:w-[480px]"
-      >
-        <Suspense fallback={null}>
-          <WaveField />
-        </Suspense>
-        <span className="absolute bottom-3 left-3 font-mono text-[10px] uppercase tracking-[0.2em] text-paper/70">
-          /system.render
-        </span>
-      </motion.div>
-
       <motion.div style={{ y, opacity }} className="relative z-10 flex flex-col gap-0">
         <div className="reveal-mask pt-[0.28em]">
           <motion.h1

@@ -16,6 +16,11 @@ function getAspect(index: number) {
 }
 
 export default function Work() {
+  const columns = [
+    projects.filter((_, index) => index % 2 === 0),
+    projects.filter((_, index) => index % 2 === 1),
+  ]
+
   return (
     <section id="work" className="border-t border-line px-6 py-32 md:px-12 lg:px-16">
       <div className="mb-16 flex items-end justify-between border-b border-ink pb-8">
@@ -33,9 +38,14 @@ export default function Work() {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 items-start gap-x-8 gap-y-6 md:grid-cols-2">
-        {projects.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} />
+      <div className="grid grid-cols-1 items-start gap-x-8 gap-y-10 md:grid-cols-2">
+        {columns.map((column, columnIndex) => (
+          <div key={columnIndex} className="flex flex-col gap-10 md:gap-12">
+            {column.map((project, projectIndex) => {
+              const index = projectIndex * 2 + columnIndex
+              return <ProjectCard key={project.id} project={project} index={index} />
+            })}
+          </div>
         ))}
       </div>
     </section>
